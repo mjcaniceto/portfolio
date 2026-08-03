@@ -1,0 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  /* Color Palette for Tactical Blueprint Aesthetic */
+  --color-paper: #F4F1EA;  /* Light tactical paper background */
+  --color-ink: #0D1117;    /* Deep blueprint border and primary text color */
+  --color-cyan: #00D1FF;   /* High-contrast neon cyan accent */
+  --color-grid: #D0C9BC;   /* Subtle grid lines for blueprint layout */
+
+  /* Typography Strategy */
+  --font-display: "Space Grotesk", sans-serif; /* Bold heading font */
+  --font-mono: "JetBrains Mono", monospace;    /* Technical data font */
+}
+
+@layer base {
+  body {
+    background-color: var(--color-paper);
+    color: var(--color-ink);
+    font-family: var(--font-mono);
+    -webkit-font-smoothing: antialiased;
+  }
+}
+
+.blueprint-grid {
+  background-image: 
+    linear-gradient(to right, rgba(13, 17, 23, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(13, 17, 23, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.chamfer {
+  clip-path: polygon(
+    0 0,
+    calc(100% - 8px) 0,
+    100% 8px,
+    100% 100%,
+    8px 100%,
+    0 calc(100% - 8px)
+  );
+}
