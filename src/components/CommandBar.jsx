@@ -11,3 +11,17 @@ const NAV = [
   { label: "DISPATCH", href: "#dispatch" },
   { label: "CONTACT", href: "#contact" },
 ];
+
+const { muted, toggleMute, playClick } = useSound();
+
+function useClock() {
+  const [time, setTime] = useState(new Date());
+  
+  useEffect(() => {
+    const id = setInterval(() => setTime(new Date()), 1000);
+    return () => clearInterval(id); 
+  }, []);
+  
+  return time.toLocaleTimeString("en-US", {hour12:false});
+}
+
