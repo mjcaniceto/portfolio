@@ -1,7 +1,7 @@
 export const PROFILE = {
-  name: "MARTIN JULIAN ANICETO",
-  title: "COMPUTER ENGINEER",
-  bio: "Architecting high-performance web systems, tactical dashboards, and reactive user experiences with modular precision.",
-  location: "Manila, Philippines // LAT: 65.476721, LON: -173.511416",
-  status: "ACTIVE",
+  name: "ALEX RIVERA",
+  title: "Software Engineer — Autonomous Systems",
+  bio: "I build the software that sits between hardware and intent — flight controllers, ground-control dashboards, and the APIs that hold a fleet together. Currently at Northwind Robotics.",
+  email: "alex.rivera@example.dev",
+  availability: "Open to select contract and full-time roles.",
 };

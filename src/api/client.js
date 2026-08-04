@@ -1,0 +1,37 @@
+const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
+
+async function request(path, options = {}) {
+  const res = await fetch(`${API_URL}${path}`, {
+    headers: { "Content-Type": "application/json" },
+    ...options,
+  });
+
+  let body = null;
+  try {
+    body = await res.json();
+  } catch {
+    body = null;
+  }
+
+  if (!res.ok) {
+    const message = body?.error || `Request failed with status ${res.status}`;
+    throw new Error(message);
+  }
+
+  return body;
+}
+
+export const api = {
+  getProjects: () => request("/projects"),
+  getSkills: () => request("/skills"),
+  getExperiences: () => request("/experiences"),
+  getCertifications: () => request("/certifications"),
+  getPosts: () => request("/posts"),
+  getPost: (id) => request(`/posts/${id}`),
+  getHealth: () => request("/health"),
+  postContact: (payload) =>
+    request("/contact", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    }),
+};
