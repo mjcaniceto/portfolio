@@ -69,8 +69,8 @@ export default function Hero({ experiences, skills, certifications }) {
             <span className="absolute inline-flex h-full w-full rounded-full bg-cyan animate-radar-pulse" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan" />
           </span>
-          STATUS: OPERATIONAL
-          <span className="text-ink/40">// REF_NO: LOADOUT-B</span>
+          LOCATION: MNL, PHILIPPINES
+          <span className="text-ink/40">// 65.476721, -173.511416</span>
         </div>
 
         <motion.h1
@@ -78,7 +78,7 @@ export default function Hero({ experiences, skills, certifications }) {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: "easeOut" }}
           className="font-display font-bold leading-[0.95] tracking-tight"
-          style={{ fontSize: "clamp(3.5rem, 11vw, 11rem)" }}
+          style={{ fontSize: "clamp(3.5rem, 6vw, 6rem)" }}
         >
           {PROFILE.name}
         </motion.h1>
