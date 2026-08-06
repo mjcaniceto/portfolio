@@ -4,11 +4,11 @@ import { useSound } from "../hooks/SoundContext.jsx";
 
 const NAV = [
   { label: "DECK", href: "#deck" },
-  { label: "LOADOUT", href: "#loadout" },
-  { label: "MISSIONS", href: "#missions" },
+  { label: "SKILLS", href: "#skills" },
+  { label: "PROJECTS", href: "#projects" },
   { label: "FLIGHT PATH", href: "#flight-path" },
-  { label: "CLEARANCE", href: "#clearance" },
-  { label: "DISPATCH", href: "#dispatch" },
+  { label: "CERTIFICATIONS", href: "#certifications" },
+  { label: "UPDATES", href: "#updates" },
   { label: "CONTACT", href: "#contact" },
 ];
 

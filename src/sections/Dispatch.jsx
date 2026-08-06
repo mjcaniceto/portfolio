@@ -69,7 +69,7 @@ function DispatchCard({ post }) {
 
 export default function Dispatch({ posts, loading, error, onRetry }) {
   return (
-    <SectionShell id="dispatch" index="06" title="Dispatch" refNote="QUICK_UPDATES">
+    <SectionShell id="updates" index="06" title="Updates" refNote="QUICK_UPDATES">
       {loading && <SkeletonGrid count={4} className="h-40" />}
       {error && <ErrorNote message={error} onRetry={onRetry} />}
       {!loading && !error && (

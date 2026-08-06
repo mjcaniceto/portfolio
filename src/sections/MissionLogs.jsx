@@ -71,7 +71,7 @@ export default function MissionLogs({ projects, loading, error, onRetry }) {
   };
 
   return (
-    <SectionShell id="missions" index="03" title="Mission Logs" refNote="ACTIVE_DEPLOYMENTS">
+    <SectionShell id="projects" index="03" title="Mission Logs" refNote="ACTIVE_DEPLOYMENTS">
       <div className="flex items-center gap-2 mb-8">
         <span className="text-[10px] font-mono text-ink/50 mr-2">VIEW MODE:</span>
         {["schematic", "comic"].map((v) => (

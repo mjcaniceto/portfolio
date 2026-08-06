@@ -66,7 +66,7 @@ export default function SkillMatrix({ skills, loading, error, onRetry }) {
   const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
 
   return (
-    <SectionShell id="loadout" index="02" title="Tech Loadout" refNote="SKILL_MATRIX">
+    <SectionShell id="skills" index="02" title="Tech Loadout" refNote="SKILL_MATRIX">
       {loading && <SkeletonGrid count={8} className="h-24" />}
       {error && <ErrorNote message={error} onRetry={onRetry} />}
       {!loading && !error && (

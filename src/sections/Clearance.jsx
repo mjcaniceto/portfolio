@@ -8,7 +8,7 @@ export default function Clearance({ certifications, loading, error, onRetry }) {
   const education = (certifications || []).filter((c) => c.kind === "education");
 
   return (
-    <SectionShell id="clearance" index="05" title="Clearance" refNote="CREDENTIALS_ON_FILE">
+    <SectionShell id="certifications" index="05" title="Certifications" refNote="CREDENTIALS_ON_FILE">
       {loading && <SkeletonGrid count={4} className="h-32" />}
       {error && <ErrorNote message={error} onRetry={onRetry} />}
 
