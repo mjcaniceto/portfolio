@@ -108,7 +108,7 @@ export default function Hero({ experiences, skills, certifications }) {
           className="flex flex-wrap gap-4 mt-10"
         >
           <a
-            href="#missions"
+            href="#projects"
             onClick={playClick}
             className="chamfer bg-ink text-paper px-6 py-3 text-sm font-mono font-semibold flex items-center gap-2 hover:bg-cyan hover:text-ink transition-colors"
           >
@@ -124,7 +124,7 @@ export default function Hero({ experiences, skills, certifications }) {
       </div>
 
       <div className="absolute bottom-6 right-4 sm:right-6 text-[10px] font-mono text-ink/40 hidden sm:block">
-        GRID_STABLE // SECTOR_07
+        GRID_STABLE // SECTOR_23
       </div>
     </section>
   );

@@ -48,17 +48,17 @@ function AppContent() {
           skills={skills.data || []}
           certifications={certifications.data || []}
         />
-        <SkillMatrix
-          skills={skills.data}
-          loading={skills.loading}
-          error={skills.error}
-          onRetry={skills.reload}
-        />
         <MissionLogs
           projects={projects.data}
           loading={projects.loading}
           error={projects.error}
           onRetry={projects.reload}
+        />
+        <SkillMatrix
+          skills={skills.data}
+          loading={skills.loading}
+          error={skills.error}
+          onRetry={skills.reload}
         />
         <FlightPath
           experiences={experiences.data}
