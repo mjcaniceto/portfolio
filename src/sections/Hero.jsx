@@ -69,7 +69,7 @@ export default function Hero({ experiences, skills, certifications }) {
             <span className="absolute inline-flex h-full w-full rounded-full bg-cyan animate-radar-pulse" />
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-cyan" />
           </span>
-          LOCATION: MNL, PHILIPPINES
+          LOCATION: MANILIA, PHILIPPINES
           <span className="text-ink/40">// 65.476721, -173.511416</span>
         </div>
 

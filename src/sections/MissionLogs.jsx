@@ -19,9 +19,9 @@ function SchematicCard({ project, onOpen }) {
       className="text-left border border-ink group hover:border-cyan transition-colors"
     >
       <div className="h-44 overflow-hidden border-b border-ink bg-grid/30">
-        {project.image_url && (
+        {project.thumbnail && (
           <img
-            src={project.image_url}
+            src={project.thumbnail}
             alt={project.title}
             className="w-full h-full object-cover grayscale contrast-125 group-hover:grayscale-0 transition-all duration-300"
           />
@@ -44,8 +44,8 @@ function ComicCard({ project, onOpen }) {
       style={{ boxShadow: "6px 6px 0 #111111" }}
     >
       <div className="h-44 overflow-hidden border-b-[4px] border-ink relative bg-grid/30">
-        {project.image_url && (
-          <img src={project.image_url} alt={project.title} className="w-full h-full object-cover" />
+        {project.thumbnail && (
+          <img src={project.thumbnail} alt={project.title} className="w-full h-full object-cover" />
         )}
         <span className="absolute top-2 left-2 bg-cyan text-ink text-[10px] font-mono font-bold px-2 py-1 border border-ink">
           {CATEGORY_LABEL[project.category] || project.category?.toUpperCase()}
@@ -100,9 +100,9 @@ export default function MissionLogs({ projects, loading, error, onRetry }) {
         >
           {(projects || []).map((project) =>
             view === "schematic" ? (
-              <SchematicCard key={project._id} project={project} onOpen={setActive} />
+              <SchematicCard key={project.id} project={project} onOpen={setActive} />
             ) : (
-              <ComicCard key={project._id} project={project} onOpen={setActive} />
+              <ComicCard key={project.id} project={project} onOpen={setActive} />
             )
           )}
         </motion.div>
