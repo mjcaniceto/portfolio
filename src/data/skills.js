@@ -1,41 +1,175 @@
 export const SKILLS = [
+  // ─────────────────────────────────────────────
+  // LANGUAGES
+  // ─────────────────────────────────────────────
   {
-    id: "1",
-    title: "Akuma Apparel Website",
-    codename: "akuma-apparel",
-    category: "e-commerce",
-    summary: "An archived e-commerce website for Akuma Apparel, a streetwear brand. Built with React and Tailwind CSS.",
-    stack: ["React", "Tailwind CSS", "Javascript"],
-    thumbnail: akuma_landing,
-    images: [ akuma_landing, akuma_sizer, akuma_visualizer, akuma_footer ],
-    githubUrl: "test.com",
-    liveUrl: "test.com",
-    status: "archived"
+    _id: "javascript",
+    name: "JavaScript",
+    category: "Languages",
+    proficiency: 0,
+    usage_context: "Web application development, scripting, and frontend development.",
   },
   {
-    id: "2",
-    title: "Soju Snaps",
-    codename: "soju-snaps",
-    category: "e-commerce",
-    summary: "A rental management system for Soju Snaps. A web application that allows users to manage their rental properties, bookings, and payments. Built with the MERN stack.",
-    stack: ["React", "Tailwind CSS", "Typescript", "Node.js", "Express", "MongoDB"],
-    thumbnail: "",
-    images: [],
-    githubUrl: "",
-    liveUrl: "",
-    status: "active"
+    _id: "typescript",
+    name: "TypeScript",
+    category: "Languages",
+    proficiency: 0,
+    usage_context: "Type-safe application development and scalable JavaScript projects.",
   },
   {
-    id: "3",
-    title: "Letterboxd Clone",
-    codename: "letterboxd-clone",
-    category: "web-app",
-    summary: "A letterbox clone for ___ .",
-    stack: ["React", "Tailwind CSS", "Typescript", "Node.js", "Express", "MongoDB"],
-    thumbnail: "",
-    images: [],
-    githubUrl: "",
-    liveUrl: "",
-    status: "in-progress"
-  }
+    _id: "python",
+    name: "Python",
+    category: "Languages",
+    proficiency: 0,
+    usage_context: "General-purpose programming, scripting, and automation.",
+  },
+  {
+    _id: "sql",
+    name: "SQL",
+    category: "Languages",
+    proficiency: 0,
+    usage_context: "Database querying, data manipulation, and relational data management.",
+  },
+  {
+    _id: "cpp",
+    name: "C++",
+    category: "Languages",
+    proficiency: 0,
+    usage_context: "General-purpose programming and systems-oriented development.",
+  },
+
+  // ─────────────────────────────────────────────
+  // FRAMEWORKS & RUNTIME
+  // ─────────────────────────────────────────────
+  {
+    _id: "react",
+    name: "React",
+    category: "Frameworks & Runtime",
+    proficiency: 0,
+    usage_context: "Building component-based user interfaces and web applications.",
+  },
+  {
+    _id: "nodejs",
+    name: "Node.js",
+    category: "Frameworks & Runtime",
+    proficiency: 0,
+    usage_context: "Server-side JavaScript, backend development, and API development.",
+  },
+
+  // ─────────────────────────────────────────────
+  // ENTERPRISE SYSTEMS & QA
+  // ─────────────────────────────────────────────
+  {
+    _id: "enterprise-software-configuration",
+    name: "Enterprise Software Configuration",
+    category: "Enterprise Systems & QA",
+    proficiency: 0,
+    usage_context: "Configuring and supporting enterprise software systems according to business requirements.",
+  },
+  {
+    _id: "business-process-mapping",
+    name: "Business Process Mapping",
+    category: "Enterprise Systems & QA",
+    proficiency: 0,
+    usage_context: "Documenting, analyzing, and improving business workflows and processes.",
+  },
+  {
+    _id: "qa-automation",
+    name: "QA Automation",
+    category: "Enterprise Systems & QA",
+    proficiency: 0,
+    usage_context: "Automating software quality assurance and repeatable testing processes.",
+  },
+  {
+    _id: "functional-testing",
+    name: "Functional Testing",
+    category: "Enterprise Systems & QA",
+    proficiency: 0,
+    usage_context: "Validating application functionality against business and technical requirements.",
+  },
+  {
+    _id: "regression-testing",
+    name: "Regression Testing",
+    category: "Enterprise Systems & QA",
+    proficiency: 0,
+    usage_context: "Ensuring software changes do not introduce defects into existing functionality.",
+  },
+  {
+    _id: "uat",
+    name: "User Acceptance Testing (UAT)",
+    category: "Enterprise Systems & QA",
+    proficiency: 0,
+    usage_context: "Validating software solutions from an end-user and business perspective.",
+  },
+  {
+    _id: "software-debugging",
+    name: "Software Debugging",
+    category: "Enterprise Systems & QA",
+    proficiency: 0,
+    usage_context: "Identifying, troubleshooting, and resolving software defects.",
+  },
+  {
+    _id: "sdlc",
+    name: "SDLC",
+    category: "Enterprise Systems & QA",
+    proficiency: 0,
+    usage_context: "Applying software development lifecycle concepts across development and QA activities.",
+  },
+
+  // ─────────────────────────────────────────────
+  // TOOLS
+  // ─────────────────────────────────────────────
+  {
+    _id: "git",
+    name: "Git",
+    category: "Tools",
+    proficiency: 0,
+    usage_context: "Version control, source code management, and collaborative development.",
+  },
+  {
+    _id: "jira",
+    name: "Jira",
+    category: "Tools",
+    proficiency: 0,
+    usage_context: "Issue tracking, task management, and agile project workflows.",
+  },
+  {
+    _id: "slack",
+    name: "Slack",
+    category: "Tools",
+    proficiency: 0,
+    usage_context: "Team communication, collaboration, and project coordination.",
+  },
+  {
+    _id: "technical-documentation",
+    name: "Technical Documentation",
+    category: "Tools",
+    proficiency: 0,
+    usage_context: "Creating and maintaining clear technical documentation for systems, processes, and software.",
+  },
+
+  // ─────────────────────────────────────────────
+  // CURRENTLY LEARNING
+  // ─────────────────────────────────────────────
+  {
+    _id: "aws-cloud-practitioner",
+    name: "AWS Cloud Practitioner",
+    category: "Currently Learning",
+    learning_progress: 0,
+    usage_context: "Developing foundational knowledge of AWS cloud concepts, services, security, and architecture.",
+  },
+  {
+    _id: "cisco-cybersecurity",
+    name: "Cisco Networking Academy Cybersecurity",
+    category: "Currently Learning",
+    learning_progress: 0,
+    usage_context: "Developing foundational knowledge of networking, cybersecurity principles, and security practices.",
+  },
+  {
+    _id: "mern-stack-development",
+    name: "MERN Stack Development",
+    category: "Currently Learning",
+    learning_progress: 0,
+    usage_context: "Developing full-stack web applications using MongoDB, Express, React, and Node.js.",
+  },
 ];

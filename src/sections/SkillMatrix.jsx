@@ -4,7 +4,13 @@ import SectionShell from "../components/SectionShell.jsx";
 import { SkeletonGrid, ErrorNote } from "../components/Skeleton.jsx";
 import { useSound } from "../hooks/SoundContext.jsx";
 
-const CATEGORIES = ["Languages", "Frameworks", "Drone/Hardware", "Tools"];
+const CATEGORIES = [
+  "Languages",
+  "Frameworks & Runtime",
+  "Enterprise Systems & QA",
+  "Tools",  
+  "Currently Learning",
+];
 
 function PowerBar({ proficiency }) {
   const segments = 10;

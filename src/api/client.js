@@ -1,5 +1,6 @@
 const API_URL = import.meta.env.VITE_API_URL || "http://localhost:4000/api";
 import { PROJECTS } from "../data/projects.js";
+import { SKILLS } from "../data/skills.js";
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_URL}${path}`, {
@@ -24,7 +25,7 @@ async function request(path, options = {}) {
 
 export const api = {
   getProjects: () => Promise.resolve(PROJECTS), // request("/projects"),
-  getSkills: () => request("/skills"),
+  getSkills: () => Promise.resolve(SKILLS), // request("/skills"),
   getExperiences: () => request("/experiences"),
   getCertifications: () => request("/certifications"),
   getPosts: () => request("/posts"),
