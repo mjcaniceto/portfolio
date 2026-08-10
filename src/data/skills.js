@@ -167,7 +167,7 @@ export const SKILLS = [
   },
   {
     _id: "mern-stack-development",
-    name: "MERN Stack Development",
+    name: "MERN Full-Stack Development",
     category: "Currently Learning",
     learning_progress: 0,
     usage_context: "Developing full-stack web applications using MongoDB, Express, React, and Node.js.",
