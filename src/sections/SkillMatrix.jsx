@@ -1,99 +1,90 @@
-import React, { useState } from "react";
-import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
 import SectionShell from "../components/SectionShell.jsx";
 import { SkeletonGrid, ErrorNote } from "../components/Skeleton.jsx";
-import { useSound } from "../hooks/SoundContext.jsx";
 
 const CATEGORIES = [
   "Languages",
   "Frameworks & Runtime",
   "Enterprise Systems & QA",
-  "Tools",  
+  "Tools",
   "Currently Learning",
 ];
 
-function PowerBar({ proficiency }) {
-  const segments = 10;
-  const filled = Math.round((proficiency / 100) * segments);
+// Different mechanism than the bar/expand version: proficiency is encoded as
+// type size and weight instead of a segmented bar. A skimmer reads the
+// biggest, boldest words in each column first — which is also, by design,
+// your strongest skill in that category. No click, no legend to decode
+// beyond "bigger = stronger," and the exact number is still there in-line
+// for anyone who wants precision.
+
+function tierClasses(proficiency) {
+  if (proficiency >= 90) return "text-xl font-bold text-ink";
+  if (proficiency >= 75) return "text-base font-bold text-ink";
+  if (proficiency >= 60) return "text-sm font-semibold text-ink/80";
+  return "text-xs font-medium text-ink/50";
+}
+
+function SkillTag({ skill }) {
   return (
-    <div className="flex gap-[3px]" aria-hidden="true">
-      {Array.from({ length: segments }).map((_, i) => (
-        <div
-          key={i}
-          className={`h-2 flex-1 border border-ink ${i < filled ? "bg-cyan" : "bg-paper"}`}
-        />
-      ))}
-    </div>
+    <span
+      title={skill.usage_context || undefined}
+      className={`font-display leading-none cursor-default ${tierClasses(skill.proficiency)}`}
+    >
+      {skill.name}
+      <sup className="ml-0.5 text-[9px] font-mono font-normal text-cyan align-super">
+        {skill.proficiency}
+      </sup>
+    </span>
   );
 }
 
-function SkillCell({ skill, isOpen, onToggle }) {
-  const { playClick } = useSound();
+function LearningTag({ skill }) {
   return (
-    <div className="border border-ink">
-      <button
-        onClick={() => {
-          playClick();
-          onToggle(skill._id);
-        }}
-        className="w-full text-left p-4 hover:bg-grid/20 transition-colors"
-        aria-expanded={isOpen}
-      >
-        <div className="flex justify-between items-baseline mb-2">
-          <span className="font-display font-bold text-sm">{skill.name}</span>
-          <span className="text-xs font-mono text-cyan">{skill.proficiency}%</span>
-        </div>
-        <PowerBar proficiency={skill.proficiency} />
-      </button>
-      <AnimatePresence initial={false}>
-        {isOpen && (
-          <motion.div
-            initial={{ height: 0, opacity: 0 }}
-            animate={{ height: "auto", opacity: 1 }}
-            exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.25, ease: "easeInOut" }}
-            className="overflow-hidden bg-ink text-paper"
-          >
-            <div className="p-4 text-xs font-mono space-y-1">
-              <p className="text-cyan">CATEGORY: {skill.category.toUpperCase()}</p>
-              <p>PROFICIENCY: {skill.proficiency}%</p>
-              {skill.usage_context && <p className="text-paper/70 pt-1">{skill.usage_context}</p>}
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </div>
+    <span
+      title={skill.usage_context || undefined}
+      className="text-xs font-mono border border-dashed border-ink/50 text-ink/70 px-2 py-1 cursor-default"
+    >
+      + {skill.name}
+    </span>
   );
 }
 
 export default function SkillMatrix({ skills, loading, error, onRetry }) {
-  const [openId, setOpenId] = useState(null);
-
-  const toggle = (id) => setOpenId((prev) => (prev === id ? null : id));
-
   return (
     <SectionShell id="skills" index="03" title="Tech Loadout" refNote="SKILL_MATRIX">
       {loading && <SkeletonGrid count={8} className="h-24" />}
       {error && <ErrorNote message={error} onRetry={onRetry} />}
       {!loading && !error && (
-        <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
-          {CATEGORIES.map((cat) => {
-            const items = (skills || []).filter((s) => s.category === cat);
-            if (!items.length) return null;
-            return (
-              <div key={cat}>
-                <h3 className="text-xs font-mono tracking-wider text-ink/60 mb-3 border-b border-grid pb-2">
-                  {cat.toUpperCase()}
-                </h3>
-                <div className="flex flex-col gap-3">
-                  {items.map((skill) => (
-                    <SkillCell key={skill._id} skill={skill} isOpen={openId === skill._id} onToggle={toggle} />
-                  ))}
+        <>
+          <p className="text-[10px] font-mono tracking-wider text-ink/40 mb-6">
+            SIZE = PROFICIENCY · SUPERSCRIPT = %
+          </p>
+          <div className="flex flex-col gap-8">
+            {CATEGORIES.map((cat) => {
+              const items = (skills || [])
+                .filter((s) => s.category === cat)
+                .sort((a, b) => (b.proficiency || 0) - (a.proficiency || 0));
+              if (!items.length) return null;
+              const isLearning = cat === "Currently Learning";
+              return (
+                <div key={cat} className="border-b border-grid pb-6 last:border-b-0 last:pb-0">
+                  <h3 className="text-xs font-mono tracking-wider text-cyan mb-3">
+                    {cat.toUpperCase()}
+                  </h3>
+                  <div className="flex flex-wrap items-baseline gap-x-4 gap-y-2">
+                    {items.map((skill) =>
+                      isLearning ? (
+                        <LearningTag key={skill._id} skill={skill} />
+                      ) : (
+                        <SkillTag key={skill._id} skill={skill} />
+                      )
+                    )}
+                  </div>
                 </div>
-              </div>
-            );
-          })}
-        </div>
+              );
+            })}
+          </div>
+        </>
       )}
     </SectionShell>
   );
