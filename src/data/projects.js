@@ -28,7 +28,7 @@ export const PROJECTS = [
     images: [],
     githubUrl: "",
     liveUrl: "",
-    status: "active"
+    status: "in-progress"
   },
   {
     id: "3",
