@@ -21,7 +21,7 @@ function AppContent() {
   const projects = useFetch(api.getProjects, []);
   const skills = useFetch(api.getSkills, []);
   const experiences = useFetch(api.getExperiences, []);
-  const certifications = useFetch(api.getCertifications, []);
+  const certifications = useFetch(api.getEducation, []);
   const posts = useFetch(api.getPosts, []);
 
   const [konamiActive, setKonamiActive] = useState(false);

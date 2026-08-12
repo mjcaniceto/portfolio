@@ -120,7 +120,7 @@ export default function FlightPath({
                   </div>
 
                   {/* Company */}
-                  <p className="text-xs font-mono text-cyan mb-2 tracking-wide">
+                  <p className="text-l font-mono text-cyan mb-2 tracking-wide">
                     {exp.duration}
                     {exp.current && (
                       <span className="ml-2 text-incident">
