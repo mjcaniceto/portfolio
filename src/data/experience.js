@@ -1,59 +1,68 @@
 export const EXPERIENCE = [
   {
     _id: "exp-1",
-    company: "Apex Cybernetics Corp",
-    role: "Senior Frontend Engineer",
-    duration: "2023 — PRESENT",
+    company: "Freelance",
+    role: "Freelance Software Engineer",
+    duration: "May 2026 — Present",
     current: true,
     accomplishments: [
-      "Architected responsive micro-frontend components using React and Tailwind CSS.",
-      "Engineered high-performance real-time analytics dashboards processing thousands of events/sec.",
-      "Mentored junior developers and established standardized code review practices across team squads."
+      "Build and ship landing pages and custom web applications.",
+      "Develop full-stack solutions from concept to deployment.",
+      "Create responsive, production-ready web experiences.",
+      "Manage projects independently from development through launch."
     ]
   },
   {
     _id: "exp-2",
-    company: "Vanguard Systems Lab",
-    // Base role / summary header if needed
-    role: "Software Engineering Contractor",
-    duration: "2021 — 2023",
+    company: "Innodata",
+    role: "AI Data Analyst",
+    duration: "Jan 2026 — May 2026",
     current: false,
-    // Career progression sub-roles:
-    roles: [
-      {
-        title: "Part-Time Independent Contractor",
-        duration: "2022 — 2023",
-        current: false,
-        accomplishments: [
-          "Delivered custom client-facing web application features and API integrations on a project contract basis.",
-          "Optimized bundle size by 35% through tree-shaking and dynamic import code-splitting.",
-          "Maintained and updated core legacy Node.js/Express REST microservices."
-        ]
-      },
-      {
-        title: "Software Engineer Intern",
-        duration: "2021 — 2022",
-        current: false,
-        accomplishments: [
-          "Developed UI component libraries following strict Figma design specs.",
-          "Wrote automated unit and end-to-end test suites using Jest and React Testing Library.",
-          "Collaborated with cross-functional teams during daily Agile/Scrum standups."
-        ]
-      }
-    ],
-    // Fallback/Legacy accomplishments list (optional)
-    accomplishments: []
+    accomplishments: [
+      "Evaluated complex datasets for machine learning applications.",
+      "Annotated and labeled 5,000+ data points for model training.",
+      "Maintained 95–98% data accuracy across datasets.",
+      "Followed structured annotation guidelines and data standards."
+    ]
   },
   {
     _id: "exp-3",
-    company: "Orbital Dynamics Ink",
-    role: "Junior Web Developer",
-    duration: "2020 — 2021",
+    company: "Dashlabs",
+    role: "QA Automation and Support Engineer",
+    duration: "Jun 2025 — May 2026",
+    current: false,
+    roles: [
+      {
+        title: "Part-Time Independent Contractor",
+        duration: "Aug 2025 — May 2026",
+        current: false,
+        accomplishments: [
+          "Mapped business workflows to system configurations and processes.",
+          "Created and executed 300+ test cases and automated test scripts.",
+          "Collaborated on system enhancements, deployments, and maintenance.",
+        ]
+      },
+      {
+        title: "QA and Support Engineer Intern",
+        duration: "Jun 2025 — Aug 2025",
+        current: false,
+        accomplishments: [
+          "Supported 75+ organizations with technical troubleshooting and issue resolution.",
+          "Performed functional, regression, and UAT testing across releases."
+        ]
+      }
+    ],
+  },
+  {
+    _id: "exp-4",
+    company: "Akuma Apparel",
+    role: "Co-Founder and Lead Developer",
+    duration: "Jan 2024 — Dec 2024",
     current: false,
     accomplishments: [
-      "Built landing pages and internal admin tooling using React and modern CSS utilities.",
-      "Fixed UI bugs and cross-browser rendering inconsistencies across mobile and desktop devices.",
-      "Assisted senior engineers in migrating legacy jQuery scripts to modern React hooks."
+      "Developed and maintained the brand’s website, supporting 100+ monthly users with improved performance and reliability.",
+      "Implemented new features and enhancements, improving user experience and engagement.",
+      "Managed campaigns that increased engagement by ~30–40% through data-driven content strategies."
     ]
   }
 ];
