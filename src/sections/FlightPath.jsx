@@ -1,49 +1,49 @@
+
 import React, { useEffect, useRef, useState } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Plane, ChevronRight } from "lucide-react";
 import SectionShell from "../components/SectionShell.jsx";
 import { SkeletonGrid, ErrorNote } from "../components/Skeleton.jsx";
 
-function useActiveIndex(itemRefs) {
-  const [activeIndex, setActiveIndex] = useState(0);
+function Waypoint({ current, hovered }) {
+  const highlighted = current || hovered;
 
-  useEffect(() => {
-    const updateActive = () => {
-      const viewportCenter = window.innerHeight / 2;
-
-      let closestIndex = 0;
-      let closestDistance = Infinity;
-
-      itemRefs.current.forEach((el, idx) => {
-        if (!el) return;
-
-        const rect = el.getBoundingClientRect();
-        const elementCenter = rect.top + rect.height / 2;
-        const distance = Math.abs(elementCenter - viewportCenter);
-
-        if (distance < closestDistance) {
-          closestDistance = distance;
-          closestIndex = idx;
-        }
-      });
-
-      setActiveIndex((prev) =>
-        prev !== closestIndex ? closestIndex : prev
-      );
-    };
-
-    updateActive();
-
-    window.addEventListener("scroll", updateActive, { passive: true });
-    window.addEventListener("resize", updateActive);
-
-    return () => {
-      window.removeEventListener("scroll", updateActive);
-      window.removeEventListener("resize", updateActive);
-    };
-  }, []);
-
-  return activeIndex;
+  return (
+    <svg
+      width="26"
+      height="26"
+      viewBox="0 0 24 24"
+      className={highlighted ? "text-cyan" : "text-ink"}
+    >
+      <circle
+        cx="12"
+        cy="12"
+        r="10"
+        fill="currentColor"
+        fillOpacity={highlighted ? "0.1" : "0.05"}
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="5"
+        fill="none"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+      <circle
+        cx="12"
+        cy="12"
+        r="1.6"
+        fill="currentColor"
+      />
+      <path
+        d="M12 0V3M12 21v3M0 12h3M21 12h3"
+        stroke="currentColor"
+        strokeWidth="1"
+      />
+    </svg>
+  );
 }
 
 export default function FlightPath({
@@ -52,16 +52,102 @@ export default function FlightPath({
   error,
   onRetry,
 }) {
-  const trackRef = useRef(null);
+  const [active, setActive] = useState(0);
+  const [hovered, setHovered] = useState(null);
+  const ref = useRef(null);
   const itemRefs = useRef([]);
-  const activeIndex = useActiveIndex(itemRefs);
+  const rafRef = useRef(null);
 
   const { scrollYProgress } = useScroll({
-    target: trackRef,
+    target: ref,
     offset: ["start center", "end center"],
   });
 
-  const lightY = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
+  const lightHeight = useTransform(
+    scrollYProgress,
+    [0, 1],
+    ["0%", "100%"]
+  );
+
+  useEffect(() => {
+    if (loading || !experiences?.length) {
+      itemRefs.current = [];
+      return undefined;
+    }
+
+    const updateActive = () => {
+      const viewportCenter = window.innerHeight / 2;
+
+      let closestIndex = 0;
+      let closestDistance = Infinity;
+
+      itemRefs.current
+        .slice(0, experiences.length)
+        .forEach((element, index) => {
+          if (!element) return;
+
+          const rect = element.getBoundingClientRect();
+
+          if (
+            rect.bottom < 0 ||
+            rect.top > window.innerHeight
+          ) {
+            return;
+          }
+
+          const elementCenter =
+            rect.top + rect.height / 2;
+
+          const distance = Math.abs(
+            elementCenter - viewportCenter
+          );
+
+          if (distance < closestDistance) {
+            closestDistance = distance;
+            closestIndex = index;
+          }
+        });
+
+      setActive((previous) =>
+        previous === closestIndex
+          ? previous
+          : closestIndex
+      );
+
+      rafRef.current = null;
+    };
+
+    const requestUpdate = () => {
+      if (rafRef.current !== null) return;
+
+      rafRef.current =
+        window.requestAnimationFrame(updateActive);
+    };
+
+    setActive(0);
+    requestUpdate();
+
+    window.addEventListener("scroll", requestUpdate, {
+      passive: true,
+    });
+    window.addEventListener("resize", requestUpdate);
+
+    return () => {
+      window.removeEventListener(
+        "scroll",
+        requestUpdate
+      );
+      window.removeEventListener(
+        "resize",
+        requestUpdate
+      );
+
+      if (rafRef.current !== null) {
+        window.cancelAnimationFrame(rafRef.current);
+        rafRef.current = null;
+      }
+    };
+  }, [experiences, loading]);
 
   return (
     <SectionShell
@@ -70,150 +156,216 @@ export default function FlightPath({
       title="Flight Path"
       refNote="CAREER_TIMELINE"
     >
-      {loading && <SkeletonGrid count={3} className="h-32" />}
-      {error && <ErrorNote message={error} onRetry={onRetry} />}
+      {loading && (
+        <SkeletonGrid count={3} className="h-32" />
+      )}
+
+      {error && (
+        <ErrorNote message={error} onRetry={onRetry} />
+      )}
 
       {!loading && !error && (
-        <div ref={trackRef} className="relative pl-12 sm:pl-16">
-          {/* Background Line */}
-          <div
-            className="absolute left-4 sm:left-6 top-0 bottom-0 w-px bg-grid"
-            aria-hidden="true"
-          />
+        <div
+          ref={ref}
+          className="relative pl-10 md:pl-16"
+        >
+          {/* Vertical timeline track */}
+          <div className="absolute left-[18px] md:left-[34px] top-0 bottom-0 w-px bg-grid">
+            <motion.div
+              className="w-px bg-cyan shadow-[0_0_12px_2px_rgba(0,209,255,0.6)]"
+              style={{ height: lightHeight }}
+            />
+          </div>
 
-          {/* Progress Line */}
-          <motion.div
-            className="absolute left-4 sm:left-6 top-0 w-px bg-cyan"
-            style={{ height: lightY }}
-            aria-hidden="true"
-          />
+          {(experiences || []).map((exp, i) => {
+            const isActive = active === i;
+            const isHovered = hovered === i;
+            const isHighlighted =
+              isActive || isHovered;
+            const hasRoles =
+              exp.roles && exp.roles.length > 0;
 
-          <div className="flex flex-col gap-16">
-            {(experiences || []).map((exp, i) => {
-              const isActive = i === activeIndex;
-              const hasRoles =
-                exp.roles && exp.roles.length > 0;
+            return (
+              <div
+                key={exp._id || exp.id || i}
+                ref={(element) => {
+                  itemRefs.current[i] = element;
+                }}
+                data-idx={i}
+                onMouseEnter={() => setHovered(i)}
+                onMouseLeave={() => setHovered(null)}
+                className={`group relative pb-14 transition-opacity duration-300 ${
+                  isHighlighted
+                    ? "opacity-100"
+                    : "opacity-40"
+                }`}
+              >
+                {/* Waypoint */}
+                <div className="absolute -left-[26px] md:-left-[42px] top-0 bg-paper p-1 z-10">
+                  <Waypoint
+                    current={isActive}
+                    hovered={isHovered}
+                  />
+                </div>
 
-              return (
-                <div
-                  key={exp._id || i}
-                  ref={(el) => (itemRefs.current[i] = el)}
-                  className={`relative transition-all duration-500 ${
-                    isActive
-                      ? "opacity-100 scale-100"
-                      : "opacity-35 scale-[0.985]"
-                  }`}
-                >
-                  {/* Marker */}
-                  <div className="absolute -left-12 sm:-left-16 top-1 w-9 h-9 sm:w-11 sm:h-11 flex items-center justify-center border border-ink bg-paper z-10 transition-colors duration-300">
-                    <Plane
-                      size={18}
-                      className={
-                        isActive
+                <div className="relative z-10 grid gap-1 md:grid-cols-[160px_1fr] md:gap-8">
+                  {/* Timeline metadata */}
+                  <div>
+                    <div
+                      className={`font-mono text-xs tracking-[0.3em] transition-colors duration-300 ${
+                        isHovered
                           ? "text-cyan"
-                          : "text-ink/40"
-                      }
-                      style={{
-                        transform: "rotate(45deg)",
-                      }}
-                    />
+                          : "text-blue-link"
+                      }`}
+                    >
+                      {exp.duration}
+                    </div>
+
+                    {exp.current && (
+                      <div className="font-mono text-xs tracking-[0.3em] text-cyan">
+                        // ACTIVE
+                      </div>
+                    )}
+
+                    <div
+                      className={`mt-1 inline-block font-mono text-[11px] tracking-widest px-1.5 py-0.5 border transition-colors duration-300 ${
+                        isHovered
+                          ? "border-cyan text-cyan"
+                          : "border-ink text-ink"
+                      }`}
+                    >
+                      {exp.current
+                        ? "PRESENT"
+                        : "COMPLETED"}
+                    </div>
                   </div>
 
-                  {/* Company */}
-                  <p className="text-l font-mono text-cyan mb-2 tracking-wide">
-                    {exp.duration}
-                    {exp.current && (
-                      <span className="ml-2 text-incident">
-                        // ACTIVE
-                      </span>
-                    )}
-                  </p>
+                  {/* Experience content */}
+                  <div
+                    className={`border-l-2 pl-4 md:pl-6 transition-colors duration-300 ${
+                      isHovered
+                        ? "border-cyan"
+                        : "border-ink"
+                    }`}
+                  >
+                    <h3
+                      className={`font-display font-bold text-[22px] tracking-tight2 transition-colors duration-300 ${
+                        isHovered
+                          ? "text-cyan"
+                          : "text-ink"
+                      }`}
+                    >
+                      {exp.company}
+                    </h3>
 
-                  <h3 className="font-display font-bold text-3xl mb-2">
-                    {exp.company}
-                  </h3>
-
-                  {!hasRoles && (
-                    <p className="text-lg text-ink/65 font-mono mb-4">
-                      {exp.role}
-                    </p>
-                  )}
-
-                  {hasRoles ? (
-                    <div className="mt-6 pl-5 border-l border-ink/20 space-y-8">
-                      <div className="text-xs font-mono uppercase tracking-[0.25em] text-ink/40">
-                        [ Career Progression ]
+                    {!hasRoles && (
+                      <div className="font-mono text-sm tracking-widest text-cyan">
+                        {exp.role}
                       </div>
+                    )}
 
-                      {exp.roles.map((subRole, rIdx) => (
-                        <div
-                          key={rIdx}
-                          className="space-y-3"
-                        >
-                          <div className="flex items-center gap-3">
-                            <ChevronRight
-                              size={18}
-                              className="text-cyan shrink-0"
-                            />
-
-                            <h4 className="font-display font-semibold text-xl">
-                              {subRole.title}
-                            </h4>
-                          </div>
-
-                          <p className="pl-7 text-xs font-mono text-ink/60">
-                            {subRole.duration}
-
-                            {subRole.current && (
-                              <span className="ml-2 text-incident">
-                                // CURRENT ROLE
-                              </span>
-                            )}
-                          </p>
-
-                          <ul className="space-y-3 pl-7">
-                            {(subRole.accomplishments || []).map(
-                              (line, idx) => (
-                                <li
-                                  key={idx}
-                                  className="flex gap-3 text-base lg:text-lg text-ink/85 leading-relaxed"
-                                >
-                                  <span className="text-cyan shrink-0">
-                                    —
-                                  </span>
-
-                                  <span>{line}</span>
-                                </li>
-                              )
-                            )}
-                          </ul>
+                    {hasRoles ? (
+                      <div className="mt-3 space-y-5">
+                        <div className="font-mono text-[11px] tracking-widest text-ink/40 uppercase">
+                          [ CAREER PROGRESSION ]
                         </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <ul className="space-y-3 mt-5">
-                      {(exp.accomplishments || []).map(
-                        (line, idx) => (
-                          <li
-                            key={idx}
-                            className="flex gap-3 text-base lg:text-lg text-ink/85 leading-relaxed"
-                          >
-                            <span className="text-cyan shrink-0">
-                              —
-                            </span>
 
-                            <span>{line}</span>
-                          </li>
-                        )
-                      )}
-                    </ul>
-                  )}
+                        {exp.roles.map(
+                          (subRole, roleIndex) => (
+                            <div
+                              key={roleIndex}
+                              className="space-y-2"
+                            >
+                              <div className="flex items-center gap-2">
+                                <span className="text-cyan">
+                                  ▸
+                                </span>
+
+                                <h4
+                                  className={`font-display font-bold text-lg tracking-tight transition-colors duration-300 ${
+                                    isHovered
+                                      ? "text-cyan"
+                                      : "text-ink"
+                                  }`}
+                                >
+                                  {subRole.title}
+                                </h4>
+                              </div>
+
+                              <div className="font-mono text-xs tracking-widest text-ink/50 pl-4">
+                                {subRole.duration}
+
+                                {subRole.current && (
+                                  <span className="ml-2 text-cyan">
+                                    // CURRENT
+                                  </span>
+                                )}
+                              </div>
+
+                              <ul className="space-y-1.5 pl-4">
+                                {(
+                                  subRole.accomplishments ||
+                                  []
+                                ).map(
+                                  (
+                                    accomplishment,
+                                    index
+                                  ) => (
+                                    <li
+                                      key={index}
+                                      className={`font-mono text-base leading-[1.6] flex gap-2 transition-colors duration-300 ${
+                                        isHovered
+                                          ? "text-ink/80"
+                                          : "text-ink/60"
+                                      }`}
+                                    >
+                                      <span className="text-cyan mt-0.5">
+                                        ▸
+                                      </span>
+                                      <span>
+                                        {accomplishment}
+                                      </span>
+                                    </li>
+                                  )
+                                )}
+                              </ul>
+                            </div>
+                          )
+                        )}
+                      </div>
+                    ) : (
+                      <ul className="mt-3 space-y-1.5">
+                        {(
+                          exp.accomplishments || []
+                        ).map(
+                          (accomplishment, index) => (
+                            <li
+                              key={index}
+                              className={`font-mono text-base leading-[1.6] flex gap-2 transition-colors duration-300 ${
+                                isHovered
+                                  ? "text-ink/80"
+                                  : "text-ink/60"
+                              }`}
+                            >
+                              <span className="text-cyan mt-0.5">
+                                ▸
+                              </span>
+                              <span>
+                                {accomplishment}
+                              </span>
+                            </li>
+                          )
+                        )}
+                      </ul>
+                    )}
+                  </div>
                 </div>
-              );
-            })}
-          </div>
+              </div>
+            );
+          })}
         </div>
       )}
     </SectionShell>
   );
 }
+

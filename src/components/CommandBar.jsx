@@ -3,10 +3,10 @@ import { Volume2, VolumeX, Menu, X, Crosshair } from "lucide-react";
 import { useSound } from "../hooks/SoundContext.jsx";
 
 const NAV = [
-  { label: "SKILLS", href: "#skills" },
   { label: "PROJECTS", href: "#projects" },
-  { label: "FLIGHT PATH", href: "#flight-path" },
-  { label: "CERTIFICATIONS", href: "#certifications" },
+  { label: "SKILLS", href: "#skills" },
+  { label: "EXPERIENCE", href: "#flight-path" },
+  { label: "EDUCATION", href: "#certifications" },
   { label: "UPDATES", href: "#updates" },
   { label: "CONTACT", href: "#contact" },
 ];

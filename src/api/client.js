@@ -3,6 +3,7 @@ import { PROJECTS } from "../data/projects.js";
 import { SKILLS } from "../data/skills.js";
 import { EXPERIENCE } from "../data/experience.js";
 import { EDUCATION } from "../data/education.js";
+import { UPDATES } from "../data/updates.js";
 
 async function request(path, options = {}) {
   const res = await fetch(`${API_URL}${path}`, {
@@ -30,7 +31,7 @@ export const api = {
   getSkills: () => Promise.resolve(SKILLS), // request("/skills"),
   getExperiences: () => Promise.resolve(EXPERIENCE), // request("/experiences"),
   getEducation: () => Promise.resolve(EDUCATION), // request("/education"),
-  getPosts: () => request("/posts"),
+  getPosts: () => Promise.resolve(UPDATES), // request("/posts"),
   getPost: (id) => request(`/posts/${id}`),
   getHealth: () => request("/health"),
   postContact: (payload) =>

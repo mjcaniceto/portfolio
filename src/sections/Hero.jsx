@@ -112,7 +112,7 @@ export default function Hero({ experiences, skills, certifications }) {
             onClick={playClick}
             className="chamfer bg-ink text-paper px-6 py-3 text-sm font-mono font-semibold flex items-center gap-2 hover:bg-cyan hover:text-ink transition-colors"
           >
-            VIEW MISSION LOGS <ArrowDown size={14} />
+            EXPLORE <ArrowDown size={14} />
           </a>
           <button
             onClick={handleDownload}

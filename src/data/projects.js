@@ -42,5 +42,18 @@ export const PROJECTS = [
     githubUrl: "",
     liveUrl: "",
     status: "in-progress"
+  },
+  {
+    id: "3",
+    title: "Letterboxd Clone",
+    codename: "letterboxd-clone",
+    category: "web-app",
+    summary: "A letterbox clone for ___ .",
+    stack: ["React", "Tailwind CSS", "Typescript", "Node.js", "Express", "MongoDB"],
+    thumbnail: "",
+    images: [],
+    githubUrl: "",
+    liveUrl: "",
+    status: "in-progress"
   }
 ];
