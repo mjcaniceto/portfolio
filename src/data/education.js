@@ -84,24 +84,24 @@ export const EDUCATION = [
 
   // Education
   {
-    _id: "edu-1",
+    _id: "edu-3",
     kind: "education",
-    name: "Bachelor of Science in Computer Science",
+    name: "Bachelor of Science in Computer Computeering",
     issuer: "Mapúa University",
-    year: 2026,
+    year: 2025,
   },
   {
     _id: "edu-2",
     kind: "education",
     name: "Senior High School — STEM",
-    issuer: "Mapúa Malayan Colleges Laguna",
-    year: 2022,
+    issuer: "La Consolacion College Manila",
+    year: 2020,
   },
   {
-    _id: "edu-3",
+    _id: "edu-1",
     kind: "education",
     name: "Junior High School",
-    issuer: "Mapúa Malayan Colleges Laguna",
-    year: 2020,
+    issuer: "Ramon Magsaysay High School",
+    year: 2018,
   },
 ];
