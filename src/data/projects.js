@@ -44,16 +44,16 @@ export const PROJECTS = [
     status: "in-progress"
   },
   {
-    id: "3",
-    title: "Letterboxd Clone",
-    codename: "letterboxd-clone",
+    id: "4",
+    title: "Vehicle Maintenance Tracker",
+    codename: "vehicle-maintenance-tracker",
     category: "web-app",
-    summary: "A letterbox clone for ___ .",
+    summary: "A web application for tracking vehicle maintenance schedules and expenses.",
     stack: ["React", "Tailwind CSS", "Typescript", "Node.js", "Express", "MongoDB"],
     thumbnail: "",
     images: [],
     githubUrl: "",
     liveUrl: "",
-    status: "in-progress"
+    status: "initialized"
   }
 ];

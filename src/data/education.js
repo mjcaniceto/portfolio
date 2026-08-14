@@ -82,13 +82,15 @@ export const EDUCATION = [
     credential_url: NetworkSecurity,
   },
 
-  // Education
-  {
+   {
     _id: "edu-3",
     kind: "education",
-    name: "Bachelor of Science in Computer Computeering",
+    name: "Bachelor of Science in Computer Engineering",
     issuer: "Mapúa University",
     year: 2025,
+    duration: "2021–2025",
+    location: "Manila, Philippines",
+    honors: "Deans List (2020-2021)",
   },
   {
     _id: "edu-2",
@@ -96,6 +98,9 @@ export const EDUCATION = [
     name: "Senior High School — STEM",
     issuer: "La Consolacion College Manila",
     year: 2020,
+    duration: "2018–2020",
+    location: "Manila, Philippines",
+    honors: "With Honors (2018-2020)",
   },
   {
     _id: "edu-1",
@@ -103,5 +108,8 @@ export const EDUCATION = [
     name: "Junior High School",
     issuer: "Ramon Magsaysay High School",
     year: 2018,
+    duration: "2014–2018",
+    location: "Manila, Philippines",
+    honors: "With Honors (2014-2018)",
   },
 ];

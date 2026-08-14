@@ -65,7 +65,6 @@ export default function Contact() {
               CHANNEL STATUS: OPEN
             </div>
             <div>RESPONSE WINDOW: &lt; 24H</div>
-            <div>SECURITY: END-TO-END</div>
           </div>
         </div>
 
