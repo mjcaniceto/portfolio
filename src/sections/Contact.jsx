@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Mail, Send, CheckCircle2, XCircle } from "lucide-react";
+import emailjs from "@emailjs/browser";
 import SectionShell from "../components/SectionShell.jsx";
 import { useSound } from "../hooks/SoundContext.jsx";
-import { api } from "../api/client.js";
 import { PROFILE } from "../data/profile.js";
 
 const initialForm = { name: "", email: "", subject: "", message: "" };
+
+// Retrieve variables from Vite environment file
+const EMAILJS_SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+const EMAILJS_TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+const EMAILJS_PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
 
 export default function Contact() {
   const [form, setForm] = useState(initialForm);
@@ -25,15 +30,34 @@ export default function Contact() {
     e.preventDefault();
     playClick();
     setStatus("sending");
+
+    // These field names map directly to {{from_name}}, {{from_email}}, etc. in your EmailJS template
+    const templateParams = {
+      from_name: form.name,
+      from_email: form.email,
+      subject: form.subject,
+      message: form.message,
+    };
+
     try {
-      await api.postContact(form);
+      await emailjs.send(
+        EMAILJS_SERVICE_ID,
+        EMAILJS_TEMPLATE_ID,
+        templateParams,
+        EMAILJS_PUBLIC_KEY
+      );
+
       playHum();
       setStatus("success");
       showToast("success", "TRANSMISSION RECEIVED");
       setForm(initialForm);
     } catch (err) {
+      console.error("EmailJS Error:", err);
       setStatus("error");
-      showToast("error", err.message ? `TRANSMISSION FAILED — ${err.message}` : "TRANSMISSION FAILED");
+      showToast(
+        "error",
+        err?.text ? `TRANSMISSION FAILED — ${err.text}` : "TRANSMISSION FAILED"
+      );
     } finally {
       window.setTimeout(() => setStatus("idle"), 1200);
     }
