@@ -1,6 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowDown, Download, Camera, X, Eye } from "lucide-react";
+import { ArrowDown, Download, Camera, X, Eye, Github, Linkedin } from "lucide-react";
 import { useSound } from "../hooks/SoundContext.jsx";
 import { generateResumePdf } from "../utils/generateResume.js";
 import { PROFILE } from "../data/profile.js";
@@ -193,6 +193,40 @@ export default function Hero({ experiences, skills, certifications }) {
           >
             DOWNLOAD RESUME <Download size={14} />
           </button>
+
+          {/* GitHub */}
+          <a
+            href={PROFILE.github}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={playClick}
+            aria-label="GitHub"
+            title="GitHub"
+            className="group w-11 h-11 flex items-center justify-center border border-ink bg-paper text-ink hover:bg-ink hover:text-paper hover:border-ink transition-all duration-200 chamfer"
+          >
+            <Github
+              size={20}
+              strokeWidth={1.8}
+              className="group-hover:scale-110 transition-transform"
+            />
+          </a>
+
+          {/* LinkedIn */}
+          <a
+            href={PROFILE.linkedIn}
+            target="_blank"
+            rel="noopener noreferrer"
+            onClick={playClick}
+            aria-label="LinkedIn"
+            title="LinkedIn"
+            className="group w-11 h-11 flex items-center justify-center border border-ink bg-paper text-ink hover:bg-cyan hover:text-ink hover:border-cyan transition-all duration-200 chamfer"
+          >
+            <Linkedin
+              size={20}
+              strokeWidth={1.8}
+              className="group-hover:scale-110 transition-transform"
+            />
+          </a>
         </motion.div>
       </div>
 

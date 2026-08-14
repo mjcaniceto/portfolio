@@ -7,4 +7,6 @@ export const PROFILE = {
   email: "mjcaniceto@gmail.com",
   availability: "Open to contract and full-time positions.",
   avatar: mjPortrait, 
+  github: "https://github.com/mjcaniceto",
+  linkedIn: "https://www.linkedin.com/in/mj-aniceto", 
 };
