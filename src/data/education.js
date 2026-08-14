@@ -91,6 +91,7 @@ export const EDUCATION = [
     duration: "2021–2025",
     location: "Manila, Philippines",
     honors: "Deans List (2020-2021)",
+    pubLink: "https://www.semanticscholar.org/author/Martin-Julian-C.-Aniceto/2396502616",
   },
   {
     _id: "edu-2",

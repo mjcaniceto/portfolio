@@ -19,7 +19,7 @@ export default function Clearance({ certifications, loading, error, onRetry }) {
     <SectionShell
       id="certifications"
       index="05"
-      title="Academic & Credentials"
+      title="Education"
       refNote="ACADEMIC_DOSSIER_VERIFIED"
     >
       {loading && <SkeletonGrid count={4} className="h-32" />}
@@ -29,28 +29,6 @@ export default function Clearance({ certifications, loading, error, onRetry }) {
         <div className="space-y-16">
           {/* ================= EDUCATION ================= */}
           <div className="space-y-8">
-            {/* Section Header */}
-            <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 border-b-2 border-ink pb-4">
-              <div className="flex items-center gap-3">
-                <div className="p-2.5 bg-cyan text-paper shadow-[3px_3px_0px_0px_rgba(0,0,0,1)]">
-                  <GraduationCap size={24} />
-                </div>
-
-                <div>
-                  <h3 className="font-display font-black text-xl text-ink tracking-wider uppercase">
-                    Academic Progression
-                  </h3>
-
-                  <p className="text-xs font-mono text-ink/60">
-                    // LOGGED_EDUCATION_MODULES • ACADEMIC_RECORD
-                  </p>
-                </div>
-              </div>
-
-              <span className="font-mono text-xs font-bold text-ink/50">
-                {String(education.length).padStart(2, "0")} RECORDS
-              </span>
-            </div>
 
             {/* Education Cards Grid / Mission Log Layout */}
             {education.length > 0 ? (
@@ -165,7 +143,7 @@ export default function Clearance({ certifications, loading, error, onRetry }) {
                               >
                                 {edu.location}
                               </p>
-                            </div>
+                            </div>  
                           )}
 
                           {/* Honors / Honors Attainment */}
@@ -185,6 +163,37 @@ export default function Clearance({ certifications, loading, error, onRetry }) {
                             </div>
                           )}
                         </div>
+
+                        {/* Research Publication */}
+                        {isCollege && edu.pubLink && (
+                          <div
+                            className={`pt-5 border-t-2 ${
+                              isCollege ? "border-paper/20" : "border-ink/10"
+                            }`}
+                          >
+                            <p
+                              className={`font-mono text-[9px] uppercase tracking-widest ${
+                                isCollege ? "text-paper/50" : "text-ink/40"
+                              }`}
+                            >
+                              RESEARCH PUBLICATION
+                            </p>
+
+                            <a
+                              href={edu.pubLink}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className={`mt-3 inline-flex items-center gap-2 px-4 py-2 border-2 font-mono text-xs font-bold uppercase tracking-wider transition-all duration-200 ${
+                                isCollege
+                                  ? "bg-cyan text-ink border-cyan hover:bg-paper hover:border-paper"
+                                  : "bg-paper text-ink border-ink hover:border-cyan hover:text-cyan"
+                              }`}
+                            >
+                              View Published Research
+                              <ArrowUpRight size={14} />
+                            </a>
+                          </div>
+                        )}
                       </div>
 
                       {/* Bottom Visual Accent Line */}
