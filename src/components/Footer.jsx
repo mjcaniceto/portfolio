@@ -25,7 +25,7 @@ export default function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 py-14">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 mb-10">
           <div>
-            <h3 className="font-display font-bold text-2xl mb-3">I'm ready for the next mission.</h3>
+            <h3 className="font-display font-bold text-2xl mb-3">Ready for what’s next.</h3>
             <a
               href={`mailto:${PROFILE.email}`}
               className="inline-block text-cyan text-sm font-mono border border-cyan px-4 py-2 hover:bg-cyan hover:text-ink transition-colors"
@@ -38,7 +38,7 @@ export default function Footer() {
             <p className="text-[10px] font-mono text-paper/50 mb-3">CHANNEL LINKS</p>
             <div className="flex gap-4">
               <a
-                href="https://github.com/example"
+                href="https://github.com/mjcaniceto"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="GitHub"
@@ -47,7 +47,7 @@ export default function Footer() {
                 <Github size={18} />
               </a>
               <a
-                href="https://linkedin.com/in/example"
+                href="https://www.linkedin.com/in/mj-aniceto"
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="LinkedIn"
