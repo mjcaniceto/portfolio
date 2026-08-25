@@ -13,8 +13,8 @@ export const PROJECTS = [
     stack: ["React", "Tailwind CSS", "Javascript"],
     thumbnail: akuma_landing,
     images: [ akuma_landing, akuma_sizer, akuma_visualizer, akuma_footer ],
-    githubUrl: "test.com",
-    liveUrl: "test.com",
+    githubUrl: "https://github.com/mjcaniceto/akuma-archived",
+    liveUrl: "https://mjcaniceto.github.io/akuma-archived/",
     status: "archived"
   },
   {
