@@ -43,15 +43,15 @@ export default function Hero({ experiences, skills, certifications }) {
     setGlow({ x: relX * 100, y: relY * 100 });
   };
 
-  const handleDownload = () => {
-    playHum();
-    generateResumePdf({
-      profile: PROFILE,
-      experiences: experiences || [],
-      skills: skills || [],
-      certifications: certifications || [],
-    });
-  };
+  // const handleDownload = () => {
+  //   playHum();
+  //   generateResumePdf({
+  //     profile: PROFILE,
+  //     experiences: experiences || [],
+  //     skills: skills || [],
+  //     certifications: certifications || [],
+  //   });
+  // };
 
   const openPortrait = () => {
     playClick();
@@ -187,12 +187,12 @@ export default function Hero({ experiences, skills, certifications }) {
           >
             EXPLORE <ArrowDown size={14} />
           </a>
-          <button
+          {/* <button
             onClick={handleDownload}
             className="chamfer border border-ink px-6 py-3 text-sm font-mono font-semibold flex items-center gap-2 hover:border-cyan hover:text-cyan transition-colors"
           >
             DOWNLOAD RESUME <Download size={14} />
-          </button>
+          </button> */}
 
           {/* GitHub */}
           <a

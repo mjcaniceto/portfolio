@@ -2,6 +2,7 @@ import akuma_landing from "../assets/projects/akuma/akuma_landing.png";
 import akuma_sizer from "../assets/projects/akuma/akuma_sizer.png";
 import akuma_visualizer from "../assets/projects/akuma/akuma_visualizer.png";  
 import akuma_footer from "../assets/projects/akuma/akuma_footer.png";  
+import akuma_gallery from "../assets/projects/akuma/akuma_gallery.png";
 
 export const PROJECTS = [
   {
@@ -12,7 +13,7 @@ export const PROJECTS = [
     summary: "An archived e-commerce website for Akuma Apparel, a streetwear brand. Built with React and Tailwind CSS.",
     stack: ["React", "Tailwind CSS", "Javascript"],
     thumbnail: akuma_landing,
-    images: [ akuma_landing, akuma_sizer, akuma_visualizer, akuma_footer ],
+    images: [ akuma_landing, akuma_sizer, akuma_visualizer, akuma_footer, akuma_gallery ],
     githubUrl: "https://github.com/mjcaniceto/akuma-archived",
     liveUrl: "https://mjcaniceto.github.io/akuma-archived/",
     status: "archived"
